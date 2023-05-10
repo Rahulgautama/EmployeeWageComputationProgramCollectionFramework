@@ -6,11 +6,11 @@ namespace EmpWageComputationUsingCollectionFramework
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Calculate Daily Employee Wage");
-            CalculateEmpDailyWage employeeDailyWage = new CalculateEmpDailyWage(20);
-            var empWage = employeeDailyWage.CalculateWageFullTimePartTime();
+            Console.WriteLine("Calculate Daily Employee Wage switch case");
+            CalulateEmpDailyWage employeeDailyWage = new CalulateEmpDailyWage();
+            var empWage = employeeDailyWage.CalculateEmployeeWageSwitchCase();
 
-            Console.WriteLine("Employee Wage :" + empWage[5]);
+            Console.WriteLine("Employee Wage :" + empWage);
         }
     }
 }
