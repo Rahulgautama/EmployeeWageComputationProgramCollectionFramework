@@ -6,42 +6,32 @@ namespace EmpWageComputationUsingCollectionFramework
 {
     public class CalulateEmpDailyWage
     {
-        public const int EMP_RATE_PER_HOUR=20;
-        public const int IS_FULL_TIME = 1;
-        public const int IS_PART_TIME = 2;
-        int empHour = 0;
-        int empWage = 0;
-        static Random random = new Random();
-        int empCheck = random.Next(3);
-        List<int> list;
-        public CalulateEmpDailyWage()
-        {
-            list= new List<int>();
-            list.Add(EMP_RATE_PER_HOUR);
-            list.Add(IS_FULL_TIME);
-            list.Add(IS_PART_TIME);
-            list.Add(empHour);
-            list.Add(empWage);
-            list.Add(empCheck);
-        }
-
-        public int CalculateEmployeeWageSwitchCase()
-        {
-            
-            switch (list[5])
+        Model model = new Model();        
+        public void CalculateEmployeeWageMonth()
+        {            
+            for (int day = 0; day < model.NUM_OF_WORKING_DAY; day++)
             {
-                case IS_FULL_TIME:
-                    empHour = 8;
-                    break;
-                case IS_PART_TIME:
-                    empHour = 4;
-                    break;
-                default:
-                    empHour = 0;
-                    break;
+                Random random = new Random();
+                int empCheck = random.Next(3);
+                
+                switch (empCheck)
+                {
+                    case 1:
+                        model.empHour = 8;
+                        break;
+                    case 2:
+                        model.empHour = 4;
+                        break;
+                    default:
+                        model.empHour = 0;
+                        break;
+                }
+                model.empWage = model.empHour * model.EMP_RATE_PER_HOUR;
+                Console.WriteLine("Employee Wage :" + model.empWage);
+                model.totalEmpWage += model.empWage;
+
             }
-            empWage = empHour * list[0];
-            return empWage;
+            Console.WriteLine("Total EmpWage :" + model.totalEmpWage);
         }
     }
 }

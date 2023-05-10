@@ -8,9 +8,7 @@ namespace EmpWageComputationUsingCollectionFramework
         {
             Console.WriteLine("Calculate Daily Employee Wage switch case");
             CalulateEmpDailyWage employeeDailyWage = new CalulateEmpDailyWage();
-            var empWage = employeeDailyWage.CalculateEmployeeWageSwitchCase();
-
-            Console.WriteLine("Employee Wage :" + empWage);
+            employeeDailyWage.CalculateEmployeeWageMonth();            
         }
     }
 }
