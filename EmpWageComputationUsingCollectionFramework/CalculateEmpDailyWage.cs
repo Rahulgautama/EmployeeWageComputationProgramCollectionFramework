@@ -6,14 +6,18 @@ namespace EmpWageComputationUsingCollectionFramework
 {
     public class CalulateEmpDailyWage
     {
-        Model model = new Model();        
-        public void CalculateEmployeeWageMonth()
-        {            
-            for (int day = 0; day < model.NUM_OF_WORKING_DAY; day++)
+        Model model = new Model();
+        public  List<int> CalculateEmployeeWageTotalHrsAMonth()
+        {
+            int EMP_RATE_PER_HOUR =  20;            
+            int NUM_OF_WORKING_DAYS = 20;
+            int MAX_HRS_IN_MONTH = 100;
+            Random rdm = new Random();
+
+            while (model.totalWorkingDays < NUM_OF_WORKING_DAYS && model.totalWorkingHours < MAX_HRS_IN_MONTH)
             {
-                Random random = new Random();
-                int empCheck = random.Next(3);
-                
+                model.totalWorkingDays++;
+                int empCheck = rdm.Next(3);
                 switch (empCheck)
                 {
                     case 1:
@@ -26,12 +30,15 @@ namespace EmpWageComputationUsingCollectionFramework
                         model.empHour = 0;
                         break;
                 }
-                model.empWage = model.empHour * model.EMP_RATE_PER_HOUR;
-                Console.WriteLine("Employee Wage :" + model.empWage);
+                model.totalEmpHour += model.empHour;
+                model.empWage = model.empHour * EMP_RATE_PER_HOUR;
                 model.totalEmpWage += model.empWage;
-
             }
-            Console.WriteLine("Total EmpWage :" + model.totalEmpWage);
+            var list = new List<int>();
+            list.Add(model.totalWorkingDays);
+            list.Add(model.totalEmpHour);
+            list.Add(model.totalEmpWage);               
+            return list;
         }
     }
 }
