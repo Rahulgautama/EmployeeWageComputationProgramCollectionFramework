@@ -4,7 +4,13 @@ using System.Text;
 
 namespace EmpWageComputationUsingCollectionFramework
 {
-    public class EmpWageBuilderArray
+    public interface EmpBuilder
+    {
+        public void AddCompanyEmpWage(string company, int empRatePerHours, int numOfWorkingDays, int maxHoursPerMonth);
+        public int ComputeEmpWage(CompanyEmployeeDailyWage companyEmployeeDailyWage);
+        public void ComputeEmpWage();        
+    }
+    public class EmpWageBuilderArray:EmpBuilder
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
