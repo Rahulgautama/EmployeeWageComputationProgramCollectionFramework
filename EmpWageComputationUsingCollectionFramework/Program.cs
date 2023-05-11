@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace EmpWageComputationUsingCollectionFramework
@@ -7,12 +8,21 @@ namespace EmpWageComputationUsingCollectionFramework
     {
         static void Main(string[] args)
         {
-            EmpWageBuilderArray empWageBuilderArray = new EmpWageBuilderArray();
-            empWageBuilderArray.AddCompanyEmpWage("Flipkart", 20, 2, 10);
-            empWageBuilderArray.AddCompanyEmpWage("Amazon", 10, 4, 20);
-            empWageBuilderArray.AddCompanyEmpWage("Google", 32, 19, 8);
+            Console.WriteLine("Calculate Daily Employee Wage");
 
-            empWageBuilderArray.ComputeEmpWage();
+            List<Model> data = new List<Model>{
+                new Model { companyName="Jio", maxHrsPerMonth=20, empRatePerHrs=20,empWage=0,totalEmpWage=0,numOfWorkingDay=20},
+                new Model { companyName="Google", maxHrsPerMonth=20,empRatePerHrs=40,empWage=0,totalEmpWage=0,numOfWorkingDay=20}
+                };
+
+            EmpWage employeeDailyWage = new EmpWage();
+            var empDetails = employeeDailyWage.CalculateWageFullTimePartTime(data);
+            foreach (var details in empDetails)
+            {
+                Console.WriteLine("Company Name is " + details.companyName + " Total Emp Wage =" + details.totalEmpWage);
+
+            }
+            // Console.WriteLine("Employee Wage :" + empWage[]);
         }
     }
 }
