@@ -5,59 +5,32 @@ using System.Text;
 namespace EmpWageComputationUsingCollectionFramework
 {
     public class EmpWage
-    {
-        public const int IS_PART_TIME = 1;
-        public const int IS_FULL_TIME = 2;
-        private int numOfCompany = 0;
-        private CompanyEmployeeWage[] companyEmpWageList;
-
-        public EmpWage()
+    {        
+        int IS_FULL_TIME = 1;
+        int IS_PART_TIME = 2;
+        
+        public static int CalculateEmployeeWork()
         {
-            this.companyEmpWageList = new CompanyEmployeeWage[5];
+            Random random = new Random();
+            int empCheck = random.Next(3);
+            return empCheck;
         }
-        public void AddCompanyEmpWage(string company, int empRatePerHours, int numOfWorkingDays, int maxHoursPerMonth)
+        public List<Model> CalculateWageFullTimePartTime(List<Model> model)
         {
-            companyEmpWageList[this.numOfCompany] = new CompanyEmployeeWage(company, empRatePerHours, numOfWorkingDays, maxHoursPerMonth);
-            numOfCompany++;
-        }
-        public void ComputeEmpWage()
-        {
-            for (int i = 0; i < numOfCompany; i++)
+            foreach (var data in model)
             {
-                int val = this.ComputeEmpWage(this.companyEmpWageList[i]);
-                companyEmpWageList[i].setTotalEmpWage(val);
-                Console.WriteLine(this.companyEmpWageList[i].toString());
+                int empCheck = CalculateEmployeeWork();
+                if (empCheck == IS_FULL_TIME)
+                    data.empHrs= 8;
+                else if (empCheck == IS_PART_TIME)
+                    data.empHrs = 4;
+                else
+                    data.empHrs = 0;
+                data.totalEmpHrs = data.maxHrsPerMonth * data.empHrs;
+                data.totalEmpWage = data.totalEmpHrs * data.empRatePerHrs;
+                
             }
-        }
-        public int ComputeEmpWage(CompanyEmployeeWage companyEmployeeDailyWage)
-        {
-            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-            while (totalEmpHrs <= companyEmployeeDailyWage.maxHoursPerMonth && totalWorkingDays < companyEmployeeDailyWage.numOfWorkingDays)
-            {
-                totalWorkingDays++;
-                Random random = new Random();
-                int empCheck = random.Next(0, 3);
-                switch (empCheck)
-                {
-                    case IS_PART_TIME:
-                        empHrs = 4;
-                        break;
-                    case IS_FULL_TIME:
-                        empHrs = 8;
-                        break;
-                    default:
-                        empHrs = 0;
-                        break;
-                }
-                totalEmpHrs += empHrs;
-                companyEmployeeDailyWage.totalEmpWage = totalEmpHrs * companyEmployeeDailyWage.empRatePerHour;
-                // companyEmployeeDailyWage.totalEmpWage += companyEmployeeDailyWage.totalEmpWage;
-                //companyEmployeeDailyWage.totalEmpWage = companyEmployeeDailyWage.totalEmpWage* companyEmployeeDailyWage.numOfWorkingDays;
-            }
-
-            
-
-            return companyEmployeeDailyWage.totalEmpWage;
+            return model;
         }
 
 
